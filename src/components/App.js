@@ -1,34 +1,36 @@
 import React, { Component } from 'react'; 
 import axios from 'axios';
-import background from "./doe.jpeg";
+import background from "./doe.png";
 
 class App extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            selectedFile: null,
-            recivedJSON: ""
-          }
     }
+
+    state = {
+        selectedFile: "adil",
+        recivedJSON: ""
+    };
+
 
     onChangeHandler=event=>{
         this.setState({
-            selectedFile: event.target.files[0],
-            loaded: 0,
+            selectedFile: event.target.files[0]
         });
-        console.log(this.selectedFile);
+        // console.log("event.target.files[0] ",event.target.files[0]);
     }
 
     onClickHandler = () => {
-        const data = new FormData();
-        data.append('file', this.state.selectedFile);
-        console.log("data here", data);
-        axios.post("http://localhost:5000/testpage", data, { 
+        const from = this.state.selectedFile;
+        console.log("just chekcing ", from);
+        var form = new FormData();
+        form.append("myFile", from);
+        axios.post("http://localhost:5000/testpage", form, { 
             // receive two    parameter endpoint url ,form data
         })
         .then(res => { // then print response status
-            this.setState({ recivedJSON: res.description});
-            console.log(res.description);
+            this.setState({ recivedJSON: res.data});
+            console.log("Response ", this.state.recivedJSON);
             // console.log(res.statusText)
          });
     }
@@ -41,7 +43,7 @@ class App extends Component {
                 <span className="navbar-brand mb-0 h1"> Hi, welcome to our website!!</span>
                 </nav>
                 <br/>
-                <input type="file"  className="btn btn-outline-success my-2 my-sm-0" name="file" onChange={this.onChangeHandler}/>
+                <input type="file"  className="btn btn-outline-success my-2 my-sm-0" name="myFile" onChange={this.onChangeHandler}/>
                 <button type="button" className="btn btn-outline-success my-2 my-sm-0" onClick={this.onClickHandler}>Upload</button>
                 <br/>
                 <hr/><hr/>
