@@ -9,7 +9,7 @@ class App extends Component {
 
     state = {
         selectedFile: "adil",
-        recivedJSON: ""
+        recivedJSON: null,
     };
 
 
@@ -24,13 +24,13 @@ class App extends Component {
         const from = this.state.selectedFile;
         console.log("just chekcing ", from);
         var form = new FormData();
-        form.append("myFile", from);
-        axios.post("http://localhost:5000/testpage", form, { 
+        form.append("caption_image", from);
+        axios.post("http://127.0.0.1:5000/testpage", form, { 
             // receive two    parameter endpoint url ,form data
         })
         .then(res => { // then print response status
             this.setState({ recivedJSON: res.data});
-            console.log("Response ", this.state.recivedJSON);
+            console.log("Response ", this.state.recivedJSON.description);
             // console.log(res.statusText)
          });
     }
@@ -50,7 +50,7 @@ class App extends Component {
                 <nav className="navbar navbar-light bg-light" align="centre">
                     <span className="navbar-brand mb-0 h1">
                         <div>
-                            {this.recivedJSON === "" ? "" : this.recivedJSON};
+                            {this.state.recivedJSON === null ? "" : this.state.recivedJSON.description};
                         </div>
                     </span>
                 </nav>
