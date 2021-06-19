@@ -36,7 +36,6 @@ class App extends Component {
         .then(res => { // then print response status
             this.setState({ recivedJSON: res.data});
             console.log("Response ", this.state.recivedJSON.description);
-            // console.log("test: ",this.state.recivedJSON.description)
          });
     }
 
