@@ -1,6 +1,7 @@
 import React, { Component } from 'react'; 
 import "./App.css";
 import axios from 'axios';
+import logo from "./Logo.jpg"
 import background from "./joe.jpg";
 import Speech from './Speech';
 
@@ -43,32 +44,42 @@ class App extends Component {
 
     render() {
         return (
-        <div style={{ backgroundImage: `url(${background})`, backgroundRepeat: "no-repeat", backgroundAttachment: "fixed",
-        backgroundSize: "100% 100%", height: "820px"}} className="mh-100">
-                <nav className="navbar navbar-light bg-light" align="centre">
-                    <span className="navbar-brand mb-0 h1"> Hi, welcome to our website!!</span>
+            <div>
+                <nav className="navbar navbar-dark bg-dark">
+                   <a className="navbar-brand" href="#">
+                   <img src={logo} className="d-inline-block align-top" width="30" height="30" alt=""></img>
+                    BlindSight
+                   </a>
                 </nav>
-                <form onSubmit={e => { e.preventDefault(); }}>
-                <input type="file"  className="btn btn-outline-success my-2 my-sm-0" name="myFile" onChange={this.onChangeHandler}/>
-                <button type="button" className="btn btn-outline-success my-2 my-sm-0" onClick={this.onClickHandler}>Upload</button>
-                </form>
-                <br/>
-                <div style={{height: "300px", width: "1800px"}}>
-                    <img src={this.state.file}  style={{ maxHeight: "100%"}}/>
-                </div>
-                <br/>
-                <nav className="navbar navbar-light bg-light" align="centre">
-                    <span className="navbar-brand mb-0 h1">
-                        <div>
-                            {this.state.recivedJSON === "" ? "" : this.state.recivedJSON.description};
+                <div className="container-fluid main d-flex align-items-center">
+                    <div className="container card bg-dark dimensions-center">
+                        <div className="row justify-content-center">
+                            <img src={this.state.file} className = "img-dimensions my-auto"></img>
                         </div>
-                    </span>
-                </nav>
-                <div>
-                <Speech json={this.state.recivedJSON}/>
+                        <form className = "" onSubmit={e => { e.preventDefault(); }}>
+                        <div className="row justify-content-center" >
+                            <div style = {{ width : "250px"}}>
+                                <input type="file" class="form-control form-control-sm" name="myFile" onChange={this.onChangeHandler}/>
+                            </div>
+                        </div>
+                        <div className="row justify-content-center">
+                            <button type="button" class="btn btn-primary upload" onClick={this.onClickHandler}>Upload</button>
+                            {/* Replace button with spinner on upload */}
+                            {/* <div className="spinner-border text-primary" role="status"></div> */}
+                        </div>
+                        </form>
+                        <div class="d-flex justify-content-center">
+                            <label style={{ color : "white", marginRight : "10px"}}>Generated Caption</label>
+                            <div class="card">
+                                    <div class="card-body text-left px-0">
+                                        {this.state.recivedJSON === "" ? "" : this.state.recivedJSON.description}
+                                    </div>
+                            </div>
+                            <Speech json={this.state.recivedJSON}/>
+                        </div>
+                    </div>
                 </div>
-                
-        </div>
+            </div>
         );
 
     }

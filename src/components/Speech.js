@@ -5,10 +5,8 @@ const Speech = ({json}) => {
     const [value, setValue] = React.useState('');
     const { speak }  = useSpeechSynthesis();
     return (
-        <div className="speech">
-            <div className="group">
-                <button onClick={() => speak({ text : json.description})}>Speech</button>
-            </div>
+        <div>
+           <button type="button" className="btn btn-primary" aria-hidden="true" style={{marginLeft : "10px"}} onClick={() => speak({ text : json.description})}><i class="fa fa-volume-up"></i></button>            
         </div>
     );
 }
