@@ -40,6 +40,8 @@ class App extends Component {
          });
     }
 
+
+
     render() {
         return (
         <div style={{ backgroundImage: `url(${background})`, backgroundRepeat: "no-repeat", backgroundAttachment: "fixed",
@@ -63,7 +65,9 @@ class App extends Component {
                         </div>
                     </span>
                 </nav>
+                <div>
                 <Speech json={this.state.recivedJSON}/>
+                </div>
                 
         </div>
         );
