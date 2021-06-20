@@ -48,8 +48,8 @@ class App extends Component {
         return (
             <div>
                 <nav className="navbar navbar-dark bg-dark">
-                   <a className="navbar-brand" href="#">
-                   <img src={logo} className="d-inline-block align-top" width="30" height="30" alt=""></img>
+                   <a className="navbar-brand" href="#" style={{width: "100%", textAlign: "center", fontFamily: "Orbitron", fontSize: '1.5rem'}}>
+                   <i class="fa fa-eye fa-lg" aria-hidden="true" style={{marginRight: '0.5rem'}}></i>
                     BlindSight
                    </a>
                 </nav>
