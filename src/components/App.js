@@ -21,7 +21,8 @@ class App extends Component {
     onChangeHandler=event=>{
         this.setState({
             selectedFile: event.target.files[0],
-            file: URL.createObjectURL(event.target.files[0])
+            file: URL.createObjectURL(event.target.files[0]), 
+            recievedJSON: "" 
         });
         
         console.log("event.target.files[0] ",event.target.files[0]);
