@@ -14,7 +14,8 @@ class App extends Component {
     state = {
         selectedFile: "",
         recivedJSON: "",
-        file: null
+        file: null,
+        loading: false
     };
 
     onChangeHandler=event=>{
@@ -27,6 +28,7 @@ class App extends Component {
     }
 
     onClickHandler = () => {
+        this.setState({ loading: true});
         const from = this.state.selectedFile;
         console.log("just chekcing ", from);
         var form = new FormData();
@@ -35,7 +37,7 @@ class App extends Component {
             // receive two    parameter endpoint url ,form data
         })
         .then(res => { // then print response status
-            this.setState({ recivedJSON: res.data});
+            this.setState({ recivedJSON: res.data, loading: false});
             console.log("Response ", this.state.recivedJSON.description);
          });
     }
@@ -59,13 +61,13 @@ class App extends Component {
                         <form className = "" onSubmit={e => { e.preventDefault(); }}>
                         <div className="row justify-content-center" >
                             <div style = {{ width : "250px"}}>
-                                <input type="file" class="form-control form-control-sm" name="myFile" onChange={this.onChangeHandler}/>
+                                <input type="file" className="form-control form-control-sm" name="myFile" onChange={this.onChangeHandler}/>
                             </div>
                         </div>
                         <div className="row justify-content-center">
-                            <button type="button" class="btn btn-primary upload" onClick={this.onClickHandler}>Upload</button>
-                            {/* Replace button with spinner on upload */}
-                            {/* <div className="spinner-border text-primary" role="status"></div> */}
+                        {this.state.loading === false ? 
+                            <button type="button" className="btn btn-primary upload" onClick={this.onClickHandler}>Upload</button>
+                            : <label  className="spinner-border text-primary" role="status"></label>}
                         </div>
                         </form>
                         <div class="d-flex justify-content-center">
