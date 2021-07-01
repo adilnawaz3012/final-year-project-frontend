@@ -73,16 +73,20 @@ class App extends Component {
                                 <input type="file" className="form-control form-control-sm" name="myFile" onChange={this.onChangeHandler}/>
                             </div>
                         </div>
-                        {this.state.imgType === "wrong" ? 
-                                <label style={{ color : "red", marginRight : "10px"}}>Please Select an Image not other file, I hope u know what a image file is?</label> : ""
+                        <div className="row justify-content-center" >
+                                {this.state.imgType === "wrong" ? 
+                                    <label style={{ color : "red", marginRight : "10px", width: "600px"}}>Please Select an Image not other file, I hope u know what a image file is?</label> : ""
                                 }
-                        {this.state.uploadSelect === "empty" ? 
-                            <label style={{ color : "red", marginRight : "10px"}}>Please Select an Image to upload, Don't just directly press the buttton only</label> : ""
-                            } 
+                        </div>
                         <div className="row justify-content-center">
                         {this.state.loading === false ? 
                             <button type="button" className="btn btn-primary upload" onClick={this.onClickHandler}>Upload</button>
                             : <label  className="spinner-border text-primary" role="status"></label>}
+                        </div>
+                        <div className="row justify-content-center" >
+                                {this.state.uploadSelect === "empty" ? 
+                                    <label style={{ color : "red", marginRight : "10px", width: "600px"}}>Please Select an Image to upload, Don't just directly press the buttton only</label> : ""
+                                } 
                         </div>
                         </form>
                         <div class="d-flex justify-content-center">
