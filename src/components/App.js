@@ -28,14 +28,11 @@ class App extends Component {
                 imgType: ""
             });
         } else {
-            this.setState({ imgType: "wrong"})
+            this.setState({ imgType: "wrong", uploadSelect: ""})
         }
     }
 
     onClickHandler = () => {
-        if(this.state.selectedFile === "") {
-            this.setState({ uploadSelect: "empty"})
-        } else {
             this.setState({ loading: true});
             const from = this.state.selectedFile;
             console.log("just chekcing ", from);
@@ -48,7 +45,6 @@ class App extends Component {
                 this.setState({ recivedJSON: res.data, loading: false});
                 console.log("Response ", this.state.recivedJSON.description);
             });
-        }
     }
 
 
@@ -80,13 +76,8 @@ class App extends Component {
                         </div>
                         <div className="row justify-content-center">
                         {this.state.loading === false ? 
-                            <button type="button" className="btn btn-primary upload" onClick={this.onClickHandler}>Upload</button>
+                            <button type="button" className="btn btn-primary upload"  disabled={!this.state.uploadSelect} onClick={this.onClickHandler}>Upload</button>
                             : <label  className="spinner-border text-primary" role="status"></label>}
-                        </div>
-                        <div className="row justify-content-center" >
-                                {this.state.uploadSelect === "empty" ? 
-                                    <label style={{ color : "red", marginRight : "10px", width: "600px"}}>Please Select an Image to upload, Don't just directly press the buttton only</label> : ""
-                                } 
                         </div>
                         </form>
                         <div class="d-flex justify-content-center">
