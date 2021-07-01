@@ -1,8 +1,6 @@
 import React, { Component } from 'react'; 
 import "./App.css";
 import axios from 'axios';
-import logo from "./Logo.jpg"
-import background from "./joe.jpg";
 import Speech from './Speech';
 
 
@@ -15,31 +13,42 @@ class App extends Component {
         selectedFile: "",
         recivedJSON: "",
         file: null,
-        loading: false
+        loading: false,
+        imgType: "",
+        uploadSelect: ""
     };
 
     onChangeHandler=event=>{
-        this.setState({
-            selectedFile: event.target.files[0],
-            file: URL.createObjectURL(event.target.files[0])
-        });
-        
-        console.log("event.target.files[0] ",event.target.files[0]);
+        var fileName = event.target.files[0].name;
+        var fileExtension = fileName.split('.').pop();
+        if(fileExtension === "png" || fileExtension === "jpg" || fileExtension === "jpeg") {
+            this.setState({
+                selectedFile: event.target.files[0],
+                file: URL.createObjectURL(event.target.files[0]),
+                imgType: ""
+            });
+        } else {
+            this.setState({ imgType: "wrong"})
+        }
     }
 
     onClickHandler = () => {
-        this.setState({ loading: true});
-        const from = this.state.selectedFile;
-        console.log("just chekcing ", from);
-        var form = new FormData();
-        form.append("caption_image", from);
-        axios.post("http://127.0.0.1:5000/testpage", form, { 
-            // receive two    parameter endpoint url ,form data
-        })
-        .then(res => { // then print response status
-            this.setState({ recivedJSON: res.data, loading: false});
-            console.log("Response ", this.state.recivedJSON.description);
-         });
+        if(this.state.selectedFile === "") {
+            this.setState({ uploadSelect: "empty"})
+        } else {
+            this.setState({ loading: true});
+            const from = this.state.selectedFile;
+            console.log("just chekcing ", from);
+            var form = new FormData();
+            form.append("caption_image", from);
+            axios.post("http://127.0.0.1:5000/testpage", form, { 
+                // receive two    parameter endpoint url ,form data
+            })
+            .then(res => { // then print response status
+                this.setState({ recivedJSON: res.data, loading: false});
+                console.log("Response ", this.state.recivedJSON.description);
+            });
+        }
     }
 
 
@@ -64,6 +73,12 @@ class App extends Component {
                                 <input type="file" className="form-control form-control-sm" name="myFile" onChange={this.onChangeHandler}/>
                             </div>
                         </div>
+                        {this.state.imgType === "wrong" ? 
+                                <label style={{ color : "red", marginRight : "10px"}}>Please Select an Image not other file, I hope u know what a image file is?</label> : ""
+                                }
+                        {this.state.uploadSelect === "empty" ? 
+                            <label style={{ color : "red", marginRight : "10px"}}>Please Select an Image to upload, Don't just directly press the buttton only</label> : ""
+                            } 
                         <div className="row justify-content-center">
                         {this.state.loading === false ? 
                             <button type="button" className="btn btn-primary upload" onClick={this.onClickHandler}>Upload</button>

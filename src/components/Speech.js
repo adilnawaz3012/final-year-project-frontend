@@ -2,7 +2,6 @@ import React from "react";
 import { useSpeechSynthesis } from "react-speech-kit"; 
 
 const Speech = ({json}) => {
-    const [value, setValue] = React.useState('');
     const { speak }  = useSpeechSynthesis();
     return (
         <div>
@@ -10,6 +9,5 @@ const Speech = ({json}) => {
         </div>
     );
 }
-
 
 export default Speech;
