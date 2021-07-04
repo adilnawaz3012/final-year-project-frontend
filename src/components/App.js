@@ -71,7 +71,7 @@ class App extends Component {
                         </div>
                         <div className="row justify-content-center" >
                                 {this.state.imgType === "wrong" ? 
-                                    <label style={{ color : "red", marginRight : "10px", width: "600px"}}>Please Select an Image not other file, I hope u know what a image file is?</label> : ""
+                                    <label style={{ color : "red", marginRight : "10px", width: "600px"}}>"Only .jpg, .jpeg and .png files are allowed!" </label> : ""
                                 }
                         </div>
                         <div className="row justify-content-center">
