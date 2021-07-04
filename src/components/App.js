@@ -15,7 +15,7 @@ class App extends Component {
         file: null,
         loading: false,
         imgType: "",
-        uploadSelect: ""
+        uploadValid: false
     };
 
     onChangeHandler=event=>{
@@ -25,10 +25,11 @@ class App extends Component {
             this.setState({
                 selectedFile: event.target.files[0],
                 file: URL.createObjectURL(event.target.files[0]),
-                imgType: ""
+                imgType: fileExtension,
+                uploadValid: true
             });
         } else {
-            this.setState({ imgType: "wrong", uploadSelect: ""})
+            this.setState({ imgType: "wrong", uploadValid: false})
         }
     }
 
@@ -76,7 +77,7 @@ class App extends Component {
                         </div>
                         <div className="row justify-content-center">
                         {this.state.loading === false ? 
-                            <button type="button" className="btn btn-primary upload"  disabled={!this.state.uploadSelect} onClick={this.onClickHandler}>Upload</button>
+                            <button type="button" className="btn btn-primary upload"  disabled={!this.state.uploadValid} onClick={this.onClickHandler}>Upload</button>
                             : <label  className="spinner-border text-primary" role="status"></label>}
                         </div>
                         </form>
