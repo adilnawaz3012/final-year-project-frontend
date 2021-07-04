@@ -69,7 +69,7 @@ class App extends Component {
                                 <input type="file" className="form-control form-control-sm" name="myFile" onChange={this.onChangeHandler}/>
                             </div>
                         </div>
-                        <div className="row justify-content-center" >
+                        <div className="row justify-content-center" style={{ textAlign : "center" }} >
                                 {this.state.imgType === "wrong" ? 
                                     <label style={{ color : "red", marginRight : "10px", width: "600px"}}>"Only .jpg, .jpeg and .png files are allowed!" </label> : ""
                                 }
